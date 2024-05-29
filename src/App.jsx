@@ -1,30 +1,82 @@
- import styled from "styled-components"
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+
+const BASE_URL = "http://localhost:9000/";
 
 function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+
+
+  useEffect(() => {
+    const fetchFoodData = async () => {
+      setLoading(true);
+  
+      try {
+        const response = await fetch(BASE_URL);
+  
+        const json = await response.json();
+  
+        setData(json);
+        setLoading(false);
+      } catch (error) {
+        setError("Unable to fetch data");
+      }
+    };
+    fetchFoodData();
+  }, []);
+
+  console.log(data);
+
+  // const temp = [
+    
+  //     {
+  //         "name": "Boilded Egg",
+  //         "price": 10,
+  //         "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+  //         "image": "/images/egg.png",
+  //         "type": "breakfast"
+  //     },
+    
+  //   ];
+
+  if(error) return <div>{error}</div>
+  if(loading) return <div>loading</div>
+
+  
 
   return (
     <Container>
-      
-    <TopContainer>
-        <div className="logo"><img src="/logo.png" alt="FoodiesHub logo" /></div>
-        <div className="search"><input type="text" placeholder="Search Food" /></div>
-    </TopContainer>
+      <TopContainer>
+        <div className="logo">
+          <img src="/logo.png" alt="FoodiesHub logo" />
+        </div>
+        <div className="search">
+          <input type="text" placeholder="Search Food" />
+        </div>
+      </TopContainer>
 
-    <FilterContainer>
-      <Button>All</Button>
-      <Button>BreakFast</Button>
-      <Button>Dinner</Button>
-      <Button>None</Button>
-    </FilterContainer>
+      <FilterContainer>
+        <Button>All</Button>
+        <Button>BreakFast</Button>
+        <Button>Dinner</Button>
+        <Button>None</Button>
+      </FilterContainer>
+
+      <FoodCardContainer>
+        <FoodCards></FoodCards>
+      </FoodCardContainer>
     </Container>
-  )
+  );
 }
 
 export default App;
 
 const Container = styled.div`
-max-width: 1200px;
-margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 const TopContainer = styled.section`
   min-height: 140px;
@@ -33,8 +85,8 @@ const TopContainer = styled.section`
   padding: 16px;
   align-items: center;
 
-  .search{
-    input{
+  .search {
+    input {
       background-color: transparent;
       border: 1px solid red;
       color: white;
@@ -47,16 +99,24 @@ const TopContainer = styled.section`
 `;
 
 const FilterContainer = styled.section`
-display: flex;
-justify-content: center;
-gap: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 31px;
 `;
 
 const Button = styled.button`
-background: rgba(255, 67, 67, 1);
-border-radius: 5px;
-padding: 6px 12px;
-border: none;
-color: white;
-
+  background: rgba(255, 67, 67, 1);
+  border-radius: 5px;
+  padding: 6px 12px;
+  border: none;
+  color: white;
 `;
+
+const FoodCardContainer = styled.section`
+  background-image: url("/bg.png");
+  background-size: cover;
+  height: calc(100vh - 210px);
+`;
+
+const FoodCards = styled.div``;
