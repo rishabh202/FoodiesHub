@@ -28,8 +28,7 @@ function App() {
     };
     fetchFoodData();
   }, []);
-
-  // console.log(data);
+  
 
   // const temp = [
     

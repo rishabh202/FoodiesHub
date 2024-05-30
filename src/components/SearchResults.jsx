@@ -13,6 +13,7 @@ const SearchResults = ({data: foods}) => {
            </FoodCard>)
           }
         </FoodCards>
+        
       </FoodCardContainer>
     </div>
   )
