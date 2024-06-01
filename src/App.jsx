@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import SearchResults from "./components/SearchResults"
 
-const BASE_URL = "http://localhost:9000/";
+export const BASE_URL = "http://localhost:9000";
 
 function App() {
   const [data, setData] = useState(null);
@@ -106,7 +106,7 @@ const FilterContainer = styled.section`
   padding-bottom: 31px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   background: rgba(255, 67, 67, 1);
   border-radius: 5px;
   padding: 6px 12px;
