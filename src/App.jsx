@@ -8,6 +8,7 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);
 
 
 
@@ -21,6 +22,7 @@ function App() {
         const json = await response.json();
   
         setData(json);
+        setFilteredData(json);
         setLoading(false);
       } catch (error) {
         setError("Unable to fetch data");
@@ -30,17 +32,20 @@ function App() {
   }, []);
   
 
-  // const temp = [
-    
-  //     {
-  //         "name": "Boilded Egg",
-  //         "price": 10,
-  //         "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  //         "image": "/images/egg.png",
-  //         "type": "breakfast"
-  //     },
-    
-  //   ];
+   const searchFood = (e) => {
+   const searchValue = e.target.value;
+   console.log(searchValue);
+
+   if(searchFood == ""){
+    setFilteredData(null);
+   }    
+
+   const filter = data?.filter((food) => food.name.toLowerCase().includes(searchValue.toLowerCase()));
+
+   setFilteredData(filter);
+
+
+   };
 
   if(error) return <div>{error}</div>
   if(loading) return <div>loading</div>
@@ -48,13 +53,15 @@ function App() {
   
 
   return (
+    <>
+
     <Container>
       <TopContainer>
         <div className="logo">
           <img src="/logo.png" alt="FoodiesHub logo" />
         </div>
         <div className="search">
-          <input type="text" placeholder="Search Food" />
+          <input onChange={searchFood} type="text" placeholder="Search Food" />
         </div>
       </TopContainer>
 
@@ -65,17 +72,18 @@ function App() {
         <Button>None</Button>
       </FilterContainer>
       
-      <SearchResults data={data}>
-
-      </SearchResults>
 
     </Container>
+      <SearchResults data={filteredData}>
+
+      </SearchResults>
+    </>
   );
 }
 
 export default App;
 
-const Container = styled.div`
+export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;

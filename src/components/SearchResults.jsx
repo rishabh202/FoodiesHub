@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { BASE_URL } from "../App";
-import { Button } from "../App";
+import { Button, Container } from "../App";
 
 
 const SearchResults = ({ data: foods }) => {
   return (
     <div>
       <FoodCardContainer>
-        <FoodCards>
+     <Container>
+     <FoodCards>
           {foods?.map(({ name, image, text, price }) => (
             <FoodCard key={name}>
               <div className="food_image">
@@ -24,6 +25,7 @@ const SearchResults = ({ data: foods }) => {
             </FoodCard>
           ))}
         </FoodCards>
+     </Container>
       </FoodCardContainer>
     </div>
   );
@@ -34,12 +36,18 @@ export default SearchResults;
 const FoodCardContainer = styled.section`
   background-image: url("/bg.png");
   background-size: cover;
-  height: calc(100vh - 210px);
+  height: calc(100vh - 198px);
 `;
 
 const FoodCards = styled.div`
 display: flex;
 flex-wrap: wrap;
+row-gap: 32px;
+column-gap: 20px;
+justify-content: center;
+align-items: center;
+padding-top: 80px;
+
 `;
 
 const FoodCard = styled.div`
@@ -100,3 +108,7 @@ height: 167px;
   }
   
 `;
+
+
+
+
