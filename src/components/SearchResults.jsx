@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BASE_URL } from "../App";
 import { Button } from "../App";
 
+
 const SearchResults = ({ data: foods }) => {
   return (
     <div>
@@ -36,7 +37,10 @@ const FoodCardContainer = styled.section`
   height: calc(100vh - 210px);
 `;
 
-const FoodCards = styled.div``;
+const FoodCards = styled.div`
+display: flex;
+flex-wrap: wrap;
+`;
 
 const FoodCard = styled.div`
 

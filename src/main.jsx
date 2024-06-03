@@ -9,12 +9,14 @@ const GlobalStyle = createGlobalStyle`
        box-sizing: border-box;
        margin: 0;
        padding: 0;
+
      }
 
      body{
       background-color: rgba(50, 51, 52, 1);
       color: white;
       min-height: 100vh;
+      font-family: "Inter";
 
      };
 `;
